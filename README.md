@@ -21,7 +21,7 @@ My project includes the following files:
 * writeup_report.md or writeup_report.pdf summarizing the results
 
 #### 2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
+Using the Udacity provided simulator for linux os ([https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)) and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model_nvidia_6.h5
 ```
