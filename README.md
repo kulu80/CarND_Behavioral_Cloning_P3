@@ -96,9 +96,9 @@ Before the gathering the final dataset for training, I have collectd training da
 
 ![alt text](https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/sample_image.png)
 
-The total data set after agumentation was applied is 95496,The agumentation was made by filiping the image and multipling the corrosponding streeting angle by -1. The figure below shows the histogram of the original data set and after the data set was standardized.
+The total data set after agumentation was applied is 95496,The agumentation was made by filiping the image (figure below) and multipling the corrosponding streeting angle by -1. The figure below shows the histogram of the original data set and after the data set was standardized.
 
-
+![alt text](https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/histogram_ori_scaled.png)
 
 For model training the dataset was shuffled and split into 80% training data and 20 % validation data. Due to memory issue I only trained the model for 3 epochs. I tried to use the GPU in AWS however after training the model and copying it to my local machine the model didn't work to drive the car autonomously. So decided to use my laptop for training the model.  
 
