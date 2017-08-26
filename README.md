@@ -8,23 +8,7 @@ The goals  of this project are the following:
 * Build, a convolution neural network in Keras that predicts steering angles from images
 * Train and validate the model with a training and validation set
 * Test that the model successfully drives around track one without leaving the road
-* Summarize the results with a written report
-
-
-[//]: # (Image References)
-
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
-![alt text](https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/sample_image.png)
-
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
-
+* Summarize the results with a written report 
 ---
 ### Files Submitted & Code Quality
 
@@ -49,6 +33,8 @@ The model.py file contains the code for training and saving the convolution neur
 ### Model Architecture and Training Strategy
 
 #### 1. An appropriate model architecture has been employed
+
+Before I decided to settle for the final model I have tried two model architucture to extract feature. The first one is the LeNet which consitst of normalization layer, 2 convolution layers, 2 fully connected layers and the second one is the NVIDIA end to end model which consists of 9 layers, including a normalization layer, 5 convolutional layers, and 3 fully connected layers.
 
 My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
 
@@ -76,7 +62,9 @@ For details about how I created the training data, see the next section.
 
 ### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
+
+As I explained above before I settle for the final model I have used two well know model in deep learning the LeNet and NVIDIA end-to-end models. For the final test I have collected 6 laps of data from diverse perspective, center, recover and reverse drive, which produces about more than 47k datasets in total before agumentation.  The two models employ convolution neural networks model with different architucture. Before training these models and decide which one to go with, I used data agumentation technique to get more data or information for training the model. After augmentation of data, the total dataset become more than 95k. The dataset(i.e images and steering angles) were split into training and validation sets. For both models the the mse for training set is less than that of the mse for validation sets. Howere it is only the NVIDIA end-to-end mode which was able to drive that car authonomous around the track successfully.  
 
 The overall strategy for deriving a model architecture was to ...
 
@@ -94,15 +82,28 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
+Attempts was made to modify the NVIDIA model to perform better or to reduce overfitting or underfitting, however every time I introduce regularization technique such as droput or L2 the model prefoms worse,So I chose to not modify the original model architecture, and simple extract features from the model. The final model architucture is depicted in the figure below. The model consists of 9 layers, including a normalization layer, 5 convolutional layers, and 3 fully connected layers
+
+
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/cnn-architecture-624x890.png]
+![alt text](https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/cnn-architecture-624x890.png)
 
 #### 3. Creation of the Training Set & Training Process
+Before the gathering the final dataset for training, I have collectd training data by simply driving along the center track for 4 laps, 3 laps and even 6 laps, but these dataset fail to produce good dataset to appropraitly train the model to autonomously drive along the first track. The final dataset used for training the final model is collected from 2 center driving laps, 1 driving smoothly along the curve, 1 lap recover driving with out stopping recording as through the whole lap, and 2 lap reverse driving which yeild good training dataset. The figure below shows records from all cameras driving center of the track. 
+
+![alt text](https://github.com/kulu80/CarND_Behavioral_Cloning_P3/blob/master/sample_image.png)
+
+The total data set after agumentation was applied is 95496,The agumentation was made by filiping the image and multipling the corrosponding streeting angle by -1. The figure below shows the histogram of the original data set and after the data set was standardized.
+
+
+
+For model training the dataset was shuffled and split into 80% training data and 20 % validation data. Due to memory issue I only trained the model for 3 epochs. I tried to use the GPU in AWS however after training the model and copying it to my local machine the model didn't work to drive the car autonomously. So decided to use my laptop for training the model.  
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+
 
 ![alt text][image2]
 
